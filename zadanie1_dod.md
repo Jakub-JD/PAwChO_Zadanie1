@@ -159,6 +159,8 @@ Legend:
 
 Widzimy 0 zagrożeń co osiągnąłem dopiero po zmianie głównego obrazu golang z wersji 1.22 na 1.25. Przed zmianą otrzymałem dużą ilość błędów, w tym 1 Critical i aż 14 High, natomiast wszystkie błędy dotyczyły biblioteki stdlib (standarowej języka Go), wersja 1.22 okazała się przestarzałą lecz zmiana na 1.25 naprawiła wszystko.
 
+## 6. Uruchomienie aplikacji
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/2b8bf9ab-dbab-44ea-ae39-607fe268ff98" />
 
 
 
