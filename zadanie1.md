@@ -1,6 +1,8 @@
 # PAwChO_Zadanie1
 **Autor:** Jakub Fus
+
 **GitHub:** https://github.com/Jakub-JD/PAwChO_Zadanie1
+
 **DockerHub:** https://hub.docker.com/repository/docker/jakubjd/weatherapp/general
 
 ## 1. Kod oprogramowania
@@ -187,10 +189,13 @@ a. zbudowania opracowanego obrazu kontenera,
 
 <img width="1238" height="1125" alt="image" src="https://github.com/user-attachments/assets/a457804d-b838-407c-acf4-d4a5644c9fcc" />
 
+
+
 b. uruchomienia kontenera na podstawie zbudowanego obrazu, 
 - docker run -d --name weather_container -p 8080:8080 jakubjd/weatherapp:latest
 
 <img width="1260" height="123" alt="image" src="https://github.com/user-attachments/assets/0c53947d-6cf3-42ad-9423-7087a320e76a" />
+
 
 
 c. sposobu uzyskania informacji z logów, które wygenerowałą opracowana aplikacja podczas 
@@ -198,6 +203,7 @@ uruchamiana kontenera (patrz: punkt 1a),
 - docker logs weather_container
 
 <img width="781" height="213" alt="image" src="https://github.com/user-attachments/assets/85106962-0d55-4db2-b225-42796a013b77" />
+
 
 
 d. sprawdzenia, ile warstw posiada zbudowany obraz oraz jaki jest rozmiar obrazu. 
@@ -208,6 +214,8 @@ lub jeśli chcemy zwrócenia po prostu dokładnej liczby warstw
 - docker image inspect jakubjd/weatherapp:latest | jq '.[0].RootFS.Layers | length'
 
 <img width="1269" height="891" alt="image" src="https://github.com/user-attachments/assets/c48a5d93-8a5f-4964-8aaf-cd8f67394567" />
+
+
 
 
 ## Działanie aplikacji
