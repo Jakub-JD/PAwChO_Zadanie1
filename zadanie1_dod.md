@@ -83,14 +83,16 @@ Użyte polecenia do utworzenia i weryfikacji buildera:
 ## 3. Zbudowanie obrazu prosto z repozytorium github'a z użyciem cache registry
 
 Użyte polecenie budujące:
-`docker buildx build \
+```
+docker buildx build \
 -f Dockerfile_dod \
 --platform linux/amd64,linux/arm64 \
 -t jakubjd/weatherapp:dodatkowe \
 --secret id=my_token,src=<(echo "TajneHasloPAwChOJF") \
 --cache-to type=registry,ref=jakubjd/weatherapp:cache,mode=max \
 --cache-from type=registry,ref=jakubjd/weatherapp:cache \
---push https://github.com/Jakub-JD/PAwChO_Zadanie1.git#main\`
+--push https://github.com/Jakub-JD/PAwChO_Zadanie1.git#main\
+```
 
 - Pierwsze budowanie
 <img width="1247" height="1263" alt="Zrzut ekranu 2026-05-11 224003" src="https://github.com/user-attachments/assets/47ade505-767b-4867-a9bc-fab149bfeee8" />
