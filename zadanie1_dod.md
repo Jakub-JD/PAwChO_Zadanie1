@@ -91,8 +91,8 @@ Użyte parametry w komendzie:
 
 **Wyniki optymalizacji (Analiza logów):**
 
-1.  **Pierwsze budowanie (Zimny start):**
-    Proces zajął **~250 sekund**. Silnik BuildKit pobrał wszystkie obrazy bazowe, wykonał pełną kompilację kodu (`go build`) dla dwóch architektur (amd64 i arm64), a następnie wyeksportował wynik oraz warstwy pośrednie do repozytorium `weatherapp:cache` (tryb `max`).
+1.  **Pierwsze budowanie:**
+    Proces zajął **~254 sekund**. Silnik BuildKit pobrał wszystkie obrazy bazowe, wykonał pełną kompilację kodu dla dwóch architektur (amd64 i arm64), a następnie wyeksportował wynik oraz warstwy pośrednie do repozytorium `weatherapp:cache` (tryb `max`).
 
 2.  **Kolejne budowanie (Z wykorzystaniem Cache):**
     Jak widać na załączonym zrzucie ekranu logów z drugiego uruchomienia, czas budowania spadł do zaledwie **9.4 sekundy**.
