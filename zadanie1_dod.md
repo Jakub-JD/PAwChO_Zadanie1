@@ -164,6 +164,19 @@ Widzimy 0 zagrożeń co osiągnąłem dopiero po zmianie głównego obrazu golan
 ## 6. Uruchomienie aplikacji
 <img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/2b8bf9ab-dbab-44ea-ae39-607fe268ff98" />
 
+## 7. Krótkie podsumowanie użytych mechanizmów
+
+**a) Budowanie na dwa procesory (Multi-architecture)**
+Zamiast sztucznie emulować inny sprzęt, użyliśmy zmiennych `BUILDPLATFORM` i `TARGETARCH`. Dzięki nim kompilator Go wie, pod jaki procesor zbudować aplikację. Docker nie nadpisuje tych wersji, tylko łączy je w jeden tzw. Manifest List. Jak ktoś potem robi `docker pull`, jego system sam wie, którą wersję pobrać.
+
+**b) Po co używamy `--mount=type=secret`?**
+Gdybyśmy przekazali hasło zwykłą instrukcją `COPY` albo przez zmienną `ENV`, zostałoby ono na zawsze w historii obrazu i każdy mógłby je łatwo podejrzeć (np. komendą `docker history`). Mechanizm `mount secret` rozwiązuje ten problem. Plik z naszym hasłem ląduje w pamięci RAM kontenera (w `/run/secrets/`) tylko na czas wykonywania konkretnej linijki `RUN`. Jak linijka się skończy, plik całkowicie znika i w docelowym obrazie nie ma po nim śladu.
+
+**c) Po co ten sekret, skoro repozytorium z kodem jest publiczne?**
+Zgodnie z instrukcją moje repozytorium na GitHubie jest publiczne, więc Docker nie potrzebuje hasła, żeby pobrać kod (Build Context). Mechanizm `--mount=type=secret` dodałem czysto demonstracyjnie, żeby spełnić wymóg z polecenia. Wrzuciłem do niego testowe hasło i dodałem w pliku Dockerfile warunek `if`, który tylko sprawdza, czy plik się poprawnie podmontował (co widać po komunikacie w logach). W rzeczywistym projekcie użyłbym tego do pobrania np. prywatnych bibliotek z firmowego serwera.
+
+Logi gdy włączymy je z parametrem `--progress=plain`
+<img width="1694" height="177" alt="image" src="https://github.com/user-attachments/assets/9b5ee616-48d3-4dbc-a321-836f291a2426" />
 
 
 
