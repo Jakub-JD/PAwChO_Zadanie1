@@ -185,7 +185,7 @@ ENTRYPOINT ["/server"]
 ## 3. Polecenia do pracy z Dockerfile i obrazem :
 
 a. zbudowania opracowanego obrazu kontenera, 
-- docker buildx build --platform linux/amd64,linux/arm64 -t jakubjd/weatherapp:latest --no-cache --push .
+- `docker buildx build --platform linux/amd64,linux/arm64 -t jakubjd/weatherapp:latest --no-cache --push` .
 
 <img width="1238" height="1125" alt="image" src="https://github.com/user-attachments/assets/a457804d-b838-407c-acf4-d4a5644c9fcc" />
 <br> 
@@ -193,7 +193,7 @@ a. zbudowania opracowanego obrazu kontenera,
 
 
 b. uruchomienia kontenera na podstawie zbudowanego obrazu, 
-- docker run -d --name weather_container -p 8080:8080 jakubjd/weatherapp:latest
+- `docker run -d --name weather_container -p 8080:8080 jakubjd/weatherapp:latest`
 
 <img width="1260" height="123" alt="image" src="https://github.com/user-attachments/assets/0c53947d-6cf3-42ad-9423-7087a320e76a" />
 <br> 
@@ -202,7 +202,7 @@ b. uruchomienia kontenera na podstawie zbudowanego obrazu,
 
 c. sposobu uzyskania informacji z logów, które wygenerowałą opracowana aplikacja podczas 
 uruchamiana kontenera (patrz: punkt 1a), 
-- docker logs weather_container
+- `docker logs weather_container`
 
 <img width="781" height="213" alt="image" src="https://github.com/user-attachments/assets/85106962-0d55-4db2-b225-42796a013b77" />
 <br> 
@@ -210,11 +210,11 @@ uruchamiana kontenera (patrz: punkt 1a),
 
 
 d. sprawdzenia, ile warstw posiada zbudowany obraz oraz jaki jest rozmiar obrazu. 
-- docker images jakubjd/weatherapp:latest (rozmiar)
-- docker history jakubjd/weatherapp:latest (liczba warstw)
+- `docker images jakubjd/weatherapp:latest` (rozmiar)
+- `docker history jakubjd/weatherapp:latest` (liczba warstw)
 
 lub jeśli chcemy zwrócenia po prostu dokładnej liczby warstw
-- docker image inspect jakubjd/weatherapp:latest | jq '.[0].RootFS.Layers | length'
+- `docker image inspect jakubjd/weatherapp:latest | jq '.[0].RootFS.Layers | length'`
 
 <img width="1269" height="891" alt="image" src="https://github.com/user-attachments/assets/c48a5d93-8a5f-4964-8aaf-cd8f67394567" />
 <br> 
