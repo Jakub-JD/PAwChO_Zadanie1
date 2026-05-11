@@ -71,11 +71,26 @@ ENTRYPOINT ["/server"]
 ```
 ## 2. Utworzenie nowego buildera ze sterownikiem docker-container
 
+Użyte polecenia do utworzenia i weryfikacji buildera:
+`docker buildx create --name moj_builder --driver docker-container --use`
+`docker buildx inspect --bootstrap`
+
 <img width="1064" height="1005" alt="Zrzut ekranu 2026-05-11 222338" src="https://github.com/user-attachments/assets/ed1a4239-df66-42f8-a86e-475186bd806c" />
+
 
 <br><br>
 
 ## 3. Zbudowanie obrazu prosto z repozytorium github'a z użyciem cache registry
+
+Użyte polecenie budujące:
+`docker buildx build \
+-f Dockerfile_dod \
+--platform linux/amd64,linux/arm64 \
+-t jakubjd/weatherapp:dodatkowe \
+--secret id=my_token,src=<(echo "TajneHasloPAwChOJF") \
+--cache-to type=registry,ref=jakubjd/weatherapp:cache,mode=max \
+--cache-from type=registry,ref=jakubjd/weatherapp:cache \
+--push https://github.com/Jakub-JD/PAwChO_Zadanie1.git#main\`
 
 - Pierwsze budowanie
 <img width="1247" height="1263" alt="Zrzut ekranu 2026-05-11 224003" src="https://github.com/user-attachments/assets/47ade505-767b-4867-a9bc-fab149bfeee8" />
@@ -100,15 +115,20 @@ Użyte parametry w komendzie:
     * **Dowód działania:** W logach widoczne są adnotacje `CACHED`, zamiast wykonywać instrukcje lokalnie, silnik `docker-container` pobrał (zaimportował) gotowe manifesty z repozytorium `:cache` (`=> importing cache manifest from jakubjd/weatherapp:cache`).
 
 
+
 ## 4. Sprawdzenie manifestu wieloplatformowego (amd64 i arm64)
 
+Użyte polecenie do weryfikacji manifestu OCI:
+`docker buildx imagetools inspect jakubjd/weatherapp:dodatkowe`
+
 <img width="1540" height="672" alt="Zrzut ekranu 2026-05-11 224221" src="https://github.com/user-attachments/assets/dc5ee347-13fd-42ac-a559-acf20d217b20" />
-
-
 <br><br>
 
 
 ## 5. Analiza podatności CVE
+
+Użyte polecenie do analizy CVE:
+`docker run --rm aquasec/trivy image jakubjd/weatherapp:dodatkowe`
 ```
 jakub@LaptopJF:~/Zad_1$ docker run --rm aquasec/trivy image jakubjd/weatherapp:dodatkowe
 2026-05-11T20:56:56Z    INFO    [vulndb] Need to update DB
@@ -138,6 +158,8 @@ Legend:
 | Skopiowałem terminal kasując raportowanie postępu testu zamiast robić zrzut ekranu ponieważ dużą część ekranu zajmował postęp wykonywania testu przez co załapanie komendy oraz wyniku końcowego testu na jednym zrzucie było nie możliwe
 
 Widzimy 0 zagrożeń co osiągnąłem dopiero po zmianie głównego obrazu golang z wersji 1.22 na 1.25. Przed zmianą otrzymałem dużą ilość błędów, w tym 1 Critical i aż 14 High, natomiast wszystkie błędy dotyczyły biblioteki stdlib (standarowej języka Go), wersja 1.22 okazała się przestarzałą lecz zmiana na 1.25 naprawiła wszystko.
+
+
 
 
 
