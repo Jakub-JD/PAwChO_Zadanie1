@@ -97,10 +97,7 @@ Użyte parametry w komendzie:
 2.  **Kolejne budowanie (Z wykorzystaniem Cache):**
     Jak widać na załączonym zrzucie ekranu logów z drugiego uruchomienia, czas budowania spadł do zaledwie **9.4 sekundy**.
     
-    * **Dowód działania:** W logach widoczne są adnotacje `CACHED` przy najbardziej czasochłonnych krokach, takich jak pobieranie zależności (`go mod init`) oraz sama kompilacja skrośna (`go build`).
-    * **Mechanizm:** Zamiast wykonywać instrukcje lokalnie, silnik `docker-container` pobrał (zaimportował) gotowe manifesty z repozytorium `:cache` (`=> importing cache manifest from jakubjd/weatherapp:cache`).
-
-**Wniosek:** Zastosowanie zewnętrznego mechanizmu `registry cache` diametralnie skraca czas budowania aplikacji w wieloetapowych środowiskach CI/CD.
+    * **Dowód działania:** W logach widoczne są adnotacje `CACHED`, zamiast wykonywać instrukcje lokalnie, silnik `docker-container` pobrał (zaimportował) gotowe manifesty z repozytorium `:cache` (`=> importing cache manifest from jakubjd/weatherapp:cache`).
 
 
 ## 4. Sprawdzenie manifestu wieloplatformowego (amd64 i arm64)
