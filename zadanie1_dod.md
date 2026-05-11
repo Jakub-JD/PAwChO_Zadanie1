@@ -91,7 +91,7 @@ docker buildx build \
 --secret id=my_token,src=<(echo "TajneHasloPAwChOJF") \
 --cache-to type=registry,ref=jakubjd/weatherapp:cache,mode=max \
 --cache-from type=registry,ref=jakubjd/weatherapp:cache \
---push https://github.com/Jakub-JD/PAwChO_Zadanie1.git#main\
+--push https://github.com/Jakub-JD/PAwChO_Zadanie1.git#main
 ```
 
 - Pierwsze budowanie
