@@ -173,7 +173,7 @@ Zamiast sztucznie emulować inny sprzęt, użyliśmy zmiennych `BUILDPLATFORM` i
 Gdybyśmy przekazali hasło zwykłą instrukcją `COPY` albo przez zmienną `ENV`, zostałoby ono na zawsze w historii obrazu i każdy mógłby je łatwo podejrzeć (np. komendą `docker history`). Mechanizm `mount secret` rozwiązuje ten problem. Plik z naszym hasłem ląduje w pamięci RAM kontenera (w `/run/secrets/`) tylko na czas wykonywania konkretnej linijki `RUN`. Jak linijka się skończy, plik całkowicie znika i w docelowym obrazie nie ma po nim śladu.
 
 **c) Po co ten sekret, skoro repozytorium z kodem jest publiczne?**
-Zgodnie z instrukcją moje repozytorium na GitHubie jest publiczne, więc Docker nie potrzebuje hasła, żeby pobrać kod (Build Context). Mechanizm `--mount=type=secret` dodałem czysto demonstracyjnie, żeby spełnić wymóg z polecenia. Wrzuciłem do niego testowe hasło i dodałem w pliku Dockerfile warunek `if`, który tylko sprawdza, czy plik się poprawnie podmontował (co widać po komunikacie w logach). W rzeczywistym projekcie użyłbym tego do pobrania np. prywatnych bibliotek z firmowego serwera.
+Zgodnie z instrukcją moje repozytorium na GitHubie jest publiczne, więc Docker nie potrzebuje hasła, żeby pobrać kod. Mechanizm `--mount=type=secret` dodałem czysto demonstracyjnie, żeby spełnić wymóg z polecenia. Wrzuciłem do niego testowe hasło i dodałem w pliku Dockerfile warunek `if`, który tylko sprawdza, czy plik się poprawnie podmontował (co widać po komunikacie w logach).
 
 Logi gdy włączymy je z parametrem `--progress=plain`
 <img width="1694" height="177" alt="image" src="https://github.com/user-attachments/assets/9b5ee616-48d3-4dbc-a321-836f291a2426" />
